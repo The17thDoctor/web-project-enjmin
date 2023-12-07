@@ -1,0 +1,9 @@
+body, html {
+    /* Why CSS, why */
+    height: calc(100vh - 3px);
+}
+
+canvas {
+    width: 100%;
+    height: 100%;
+}

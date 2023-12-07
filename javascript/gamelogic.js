@@ -24,7 +24,7 @@ class Game {
         this.ballPosition = new Vector(canvas.width / 2, canvas.height / 2)
         this.ballSpeed = new Vector()
 
-        console.log()
+        this.xyz = document.getElementById("xyz")
 
         if ('GravitySensor' in window) {
             this.gravitySensor = new GravitySensor()
@@ -38,6 +38,7 @@ class Game {
     updateSpeedGravity() {
         this.ballSpeed.x = this.gravitySensor.x
         this.ballSpeed.y = this.gravitySensor.y
+        this.xyz.textContent = `${this.gravitySensor.x}, ${this.gravitySensor.y}, ${this.gravitySensor.z}`
     }
 
     updateSpeedKeyboard() {

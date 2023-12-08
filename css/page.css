@@ -1,6 +1,7 @@
 body, html {
     /* Why CSS, why */
-    height: calc(100vh - 3px);
+    height: 100vh;
+    overflow: hidden;
 }
 
 canvas {

@@ -25,18 +25,52 @@ if ("keepAwake" in screen) {
 }
 
 const CANVAS_ID = "main-canvas";
+const BUTTON_ID = "start-button"
+class Interface {
+
+    static game
+
+    static resizeCanvas(canvas) {
+        if (canvas == null)
+            return;
+        canvas.width = canvas.clientWidth;
+        canvas.height = canvas.clientHeight;
+    }
+
+    static bindGameToCanvas(canvas) {
+        focus(canvas);
+        Interface.resizeCanvas(canvas);
+        window.addEventListener("resize", () => {
+            Interface.resizeCanvas(canvas);
+        });
+
+        Interface.game = new Game(canvas);
+    }
+
+    static hideUI() {
+        let header = document.getElementById("title-header")
+        let main = document.getElementById("main-content")
+        header.className = "title-header title-hide"
+        main.className = "button-main button-hide"
+    }
+
+    static showUI() {
+        let header = document.getElementById("title-header")
+        let main = document.getElementById("main-content")
+        header.className = "title-header title-show"
+        main.className = "button-main button-show"
+    }
+}
+
 let canvas = document.getElementById(CANVAS_ID);
+Interface.bindGameToCanvas(canvas);
 
-function resizeCanvas() {
-    if (canvas == null)
-        return;
-    canvas.width = canvas.clientWidth;
-    canvas.height = canvas.clientHeight;
-}
 
-if (canvas != null) {
-    focus(canvas)
-    resizeCanvas();
-    window.addEventListener("resize", resizeCanvas);
-    let game = new Game(canvas);
-}
+let startButton = document.getElementById(BUTTON_ID);
+startButton.addEventListener("click", () => {
+    Interface.game.reset()
+    Interface.game.start()
+    Interface.hideUI()
+})
+
+export default Interface

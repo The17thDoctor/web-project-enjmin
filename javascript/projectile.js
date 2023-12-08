@@ -30,6 +30,7 @@ class Projectile {
 
         if (this.position.distance(game.ballPosition) < this.radius + game.ballRadius) {
             this.explosing = true
+            game.declareLost()
         } else if (this.travelledLength >= this.length) {
             this.explosing = true
         }

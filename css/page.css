@@ -54,6 +54,34 @@ canvas {
     transition: 0.3s;
 }
 
+.button-show {
+    animation: button-slide 1s ease-in-out forwards;
+}
+
+.button-hide {
+    animation: button-slide-back 1s ease-in-out forwards;
+}
+
+@keyframes button-slide {
+    0% {
+        bottom: -50%
+    }
+
+    100% {
+        bottom: 0px
+    }
+}
+
+@keyframes button-slide-back {
+    100% {
+        bottom: -50%
+    }
+
+    0% {
+        bottom: 0px
+    }
+}
+
 @keyframes title-slide {
     0% {
         top: -50%

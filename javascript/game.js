@@ -1,5 +1,6 @@
 import Projectile from "./projectile.js";
 import { Vector, clamp } from "./utils.js"
+import Interface from "./main.js";
 
 const DAMPEN_FACTOR = 0.25;
 const GYRO_SENSITIVITY = 0.4;
@@ -53,6 +54,22 @@ class Game {
         clearInterval(this.gameTick)
     }
 
+    reset() {
+        this.projectiles.forEach(projectile => {
+            projectile.explosing = true
+        })
+
+        this.ballPosition = new Vector(this.canvas.width / 2, this.canvas.height / 2)
+        this.ballRadius = 25;
+        this.exploded = false
+        this.exploding = false
+    }
+
+    declareLost() {
+        this.exploding = true
+        setTimeout(() => Interface.showUI(), 1500)
+    }
+
     spawnProjectile() {
         let x, cx
         if (Math.random() >= 0.5) {
@@ -71,6 +88,14 @@ class Game {
     performGameTick() {
         if (!this.gravitySensor.hasReading) {
             this.updateSpeedKeyboard();
+        }
+
+        if (this.exploding && !this.exploded) {
+            this.ballRadius += 0.2
+            if (this.ballRadius > 100) {
+                this.exploded = true
+                this.pause()
+            }
         }
 
         this.ballSpeed.mul(0.98)
@@ -98,9 +123,16 @@ class Game {
         this.context.fillStyle = "#5182";
         this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
         this.context.fillStyle = "#CC2";
+        this.context.strokeStyle = "#CC2";
         this.context.beginPath();
         this.context.arc(this.ballPosition.x, this.ballPosition.y, this.ballRadius, 0, Math.PI * 2);
-        this.context.fill();
+        
+        if (this.exploding) {
+            this.context.stroke();
+        } else {
+            this.context.fill();
+        }
+        
 
         this.projectiles.forEach(projectile => {
             projectile.draw(this.context)

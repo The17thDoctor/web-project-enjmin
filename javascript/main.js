@@ -9,15 +9,19 @@ if ('mozOrientation' in screen) {
 }
 
 if (screen[orientKey].lock) {
-    screen[orientKey].lock(screen[orientKey].type)
+    screen[orientKey].lock(screen[orientKey].type).catch(() => {
+        console.log("Unable to lock rotation.")
+    })
 } else {
-    screen.orientationLock(screen[orientKey])
+    screen.orientationLock(screen[orientKey]).catch(() => {
+        console.log("Unable to lock rotation.")
+    })
 }
 
 if ("keepAwake" in screen) {
     screen.keepAwake = true
 } else if ("wakeLock" in navigator) {
-    navigator.wakeLock.request('screen')
+    navigator.wakeLock.request('screen').catch(console.error)
 }
 
 const CANVAS_ID = "main-canvas";
@@ -35,5 +39,4 @@ if (canvas != null) {
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
     let game = new Game(canvas);
-    game.start()
 }

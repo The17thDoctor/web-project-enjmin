@@ -3,14 +3,22 @@
     <head>
         <link rel="stylesheet" href="css/reset.css" />
         <link rel="stylesheet" href="css/page.css" />
+        <link rel="manifest" href="manifest.json" />
         <title>The Amazing Ball Game&trade;</title>
+
+        <meta name="theme-color" content="#000"/>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="Its a game, with a ball. Amazing&trade;." />
     </head>
     <body>
         <script defer src="javascript/main.js" type="module"></script>
         <canvas id="main-canvas"></canvas>
-        <header class="title-header">
+        <header class="title-header title-show">
             <h1>The Amazing Ball Game&trade;</h1>
+            <h2>Controls: ZQSD, ←↑→↓, Gyroscope !</h2>
         </header>
+        <main class="button-main button-show">
+            <button type="button">Play The Amazing Ball Game&trade;</button>
+        </main>
     </body>
 </html>

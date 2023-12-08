@@ -16,10 +16,45 @@ canvas {
     align-items: center;
     width: 100%;
     margin-top: 3em;
-    animation: slide-down 1s ease-in-out forwards;
+    
 }
 
-@keyframes slide-down {
+.title-show {
+    animation: title-slide 1s ease-in-out forwards;
+}
+
+.title-hide {
+    animation: title-slide-back 1s ease-in-out forwards;
+}
+
+.button-main {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    bottom: 0%;
+    margin-bottom: 10em;
+}
+
+.button-main > button {
+    border: none;
+    background-color: #add8e6;
+    padding: 1em;
+    border-radius: 2em;
+    font-family: "Comic Sans MS";
+    font-weight: bolder;
+    font-size: 1em;
+    transition: 0.3s;
+}
+
+.button-main > button:hover {
+    background-color: #7b9aa4;
+    font-size: 1.2em;
+    transition: 0.3s;
+}
+
+@keyframes title-slide {
     0% {
         top: -50%
     }
@@ -29,8 +64,14 @@ canvas {
     }
 }
 
-.title-header:enabled {
-    top: 0px ease-in
+@keyframes title-slide-back {
+    100% {
+        top: -50%
+    }
+
+    0% {
+        top: 0px
+    }
 }
 
 h1 {
@@ -42,6 +83,15 @@ h1 {
 
     animation: rainbow 2.5s linear;
 	animation-iteration-count: infinite;
+}
+
+h2 {
+    margin-top: 1em;
+    font-family: "Comic Sans MS";
+    font-weight: bolder;
+    font-size: 1em;
+    color: white;
+    text-align: center;
 }
 
 @keyframes rainbow{

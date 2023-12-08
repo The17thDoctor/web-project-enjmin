@@ -20,10 +20,10 @@ class Projectile {
     tick(game) {
         if (this.explosing) return
 
+        // Gravity
         let force = this.mass * game.ballMass / this.position.distance(game.ballPosition) ** 2
         let forceVector = Vector.sub(game.ballPosition, this.position).normalize().mul(force)
         this.direction.add(forceVector).normalize()
-        console.log(force)
 
         this.position.add(Vector.mul(this.direction, this.speed))
         this.travelledLength += this.speed

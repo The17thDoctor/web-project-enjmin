@@ -1,7 +1,7 @@
 import { Vector } from "./utils.js"
 
 class Projectile {
-    static radius = 5
+    static radius = 2
 
     constructor(start, end, speed) {
         this.position = start

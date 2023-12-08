@@ -15,6 +15,7 @@ function resizeCanvas() {
 }
 
 if (canvas != null) {
+    focus(canvas)
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
     let game = new Game(canvas);

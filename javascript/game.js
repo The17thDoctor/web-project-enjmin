@@ -11,6 +11,7 @@ class Game {
     paused = true
 
     constructor(canvas) {
+        this.ballMass = 100
         this.ballRadius = 25;
         this.canvas = canvas;
         this.context = canvas.getContext("2d", {"alpha": false});

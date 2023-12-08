@@ -2,8 +2,10 @@ import { Vector } from "./utils.js"
 
 class Projectile {
     static radius = 2
+    static mass = 1
 
     constructor(start, end, speed) {
+        this.mass = Projectile.mass
         this.position = start
         this.direction = new Vector(end.x - start.x, end.y - start.y)
         this.radius = Projectile.radius
@@ -17,6 +19,12 @@ class Projectile {
 
     tick(game) {
         if (this.explosing) return
+
+        let force = this.mass * game.ballMass / this.position.distance(game.ballPosition) ** 2
+        let forceVector = Vector.sub(game.ballPosition, this.position).normalize().mul(force)
+        this.direction.add(forceVector).normalize()
+        console.log(force)
+
         this.position.add(Vector.mul(this.direction, this.speed))
         this.travelledLength += this.speed
 

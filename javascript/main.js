@@ -1,8 +1,24 @@
 import { Game } from "./game.js"
 
 // For phones
-navigator.wakeLock.request("screen")
-window.screen.orientation.lock("portrait-primary")
+let orientKey = 'orientation';
+if ('mozOrientation' in screen) {
+    orientKey = 'mozOrientation';
+} else if ('msOrientation' in screen) {
+    orientKey = 'msOrientation';
+}
+
+if (screen[orientKey].lock) {
+    screen[orientKey].lock(screen[orientKey].type)
+} else {
+    screen.orientationLock(screen[orientKey])
+}
+
+if ("keepAwake" in screen) {
+    screen.keepAwake = true
+} else if ("wakeLock" in navigator) {
+    navigator.wakeLock.request('screen')
+}
 
 const CANVAS_ID = "main-canvas";
 let canvas = document.getElementById(CANVAS_ID);
